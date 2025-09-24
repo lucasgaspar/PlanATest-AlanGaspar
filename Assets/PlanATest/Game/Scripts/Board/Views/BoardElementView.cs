@@ -23,6 +23,7 @@ namespace PlanATest.Game.Board.View
             _position = position;
             gameObject.SetActive(true);
             _spriteRenderer.sprite = _elementData.Sprite;
+            _spriteRenderer.sortingOrder = position.y;
             transform.localPosition = new Vector3(_position.x * _sizeX + _offsetX, _position.y * _sizeY + _offsetY, 0);
         }
 
