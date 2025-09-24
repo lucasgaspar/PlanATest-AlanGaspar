@@ -1,4 +1,6 @@
+using System;
 using PlanATest.Game.Board.Data;
+using UnityEngine;
 
 namespace PlanATest.Game.Board.Interfaces
 {
@@ -7,5 +9,7 @@ namespace PlanATest.Game.Board.Interfaces
         Cell[,] GetAllCells();
         int GetWidth();
         int GetHeight();
+        void ClickedElement(Vector2Int position);
+        Action<BoardChangeData> OnBoardChanged { get; set; }
     }
 }

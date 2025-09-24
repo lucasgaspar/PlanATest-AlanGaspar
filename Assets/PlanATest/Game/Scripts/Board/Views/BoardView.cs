@@ -17,6 +17,12 @@ namespace PlanATest.Game.Board.View
         private void Start()
         {
             SetupBoard();
+            _grid.OnBoardChanged += OnBoardChanged;
+        }
+
+        private void OnDestroy()
+        {
+            _grid.OnBoardChanged -= OnBoardChanged;
         }
 
         private void SetupBoard()
@@ -34,6 +40,36 @@ namespace PlanATest.Game.Board.View
                     gridElementView.transform.SetParent(transform);
                     _elements[position] = gridElementView;
                 }
+            }
+        }
+
+        private async void OnBoardChanged(BoardChangeData boardChangeData)
+        {
+            foreach (var elementToDestroy in boardChangeData.ElementsToDestroy)
+            {
+                _elements[elementToDestroy.Position].Destroy();
+            }
+
+            await UniTask.WaitForSeconds(1f);
+
+            foreach (var elementToMove in boardChangeData.ElementsToMove)
+            {
+                var gridElementView = _elements[elementToMove.From];
+                gridElementView.MoveToPosition(elementToMove.To);
+                _elements.Remove(elementToMove.From);
+                _elements[elementToMove.To] = gridElementView;
+            }
+
+            if (boardChangeData.ElementsToMove.Count > 0)
+            {
+                await UniTask.WaitForSeconds(1f);
+            }
+
+            foreach (var elementToSpawn in boardChangeData.ElementsToSpawn)
+            {
+                var gridElementView = _boardElementViewPool.Spawn(elementToSpawn.ElementData, elementToSpawn.Position);
+                gridElementView.transform.SetParent(transform);
+                _elements[elementToSpawn.Position] = gridElementView;
             }
         }
     }
