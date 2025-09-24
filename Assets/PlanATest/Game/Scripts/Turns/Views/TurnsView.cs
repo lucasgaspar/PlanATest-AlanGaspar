@@ -1,16 +1,30 @@
+using PlanATest.Game.Turns.Interfaces;
+using TMPro;
 using UnityEngine;
+using Zenject;
 
-public class TurnsView : MonoBehaviour
+namespace PlanATest.Game.Turns.Views
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class TurnsView : MonoBehaviour
     {
-        
-    }
+        [SerializeField] private TMP_Text _turnsText;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [Inject] private ITurnsManager _turnsManager;
+
+        private void Start()
+        {
+            _turnsManager.OnTurnsChanged += UpdateTurnsDisplay;
+            UpdateTurnsDisplay(_turnsManager.CurrentTurn);
+        }
+
+        private void OnDestroy()
+        {
+            _turnsManager.OnTurnsChanged -= UpdateTurnsDisplay;
+        }
+
+        private void UpdateTurnsDisplay(int newTurns)
+        {
+            _turnsText.SetText(newTurns.ToString());
+        }
     }
 }

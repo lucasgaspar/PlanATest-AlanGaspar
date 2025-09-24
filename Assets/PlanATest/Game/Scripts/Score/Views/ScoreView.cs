@@ -24,7 +24,7 @@ namespace PlanATest.Game.Score.Views
 
         private void UpdateScoreDisplay(int newScore)
         {
-            _scoreText.text = $"{newScore:0.000}";
+            _scoreText.SetText(newScore.ToString());
         }
     }
 }
