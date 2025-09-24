@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using PlanATest.Game.Board.Data;
 using PlanATest.Game.Board.Interfaces;
 using PlanATest.Game.Game.Data;
+using PlanATest.Game.Score.Interfaces;
+using PlanATest.Game.Turns.Interfaces;
 using UnityEngine;
 using Zenject;
 
@@ -13,6 +15,8 @@ namespace PlanATest.Game.Board.Manager
         private Cell[,] _cells;
 
         [Inject] private LevelData _levelData;
+        [Inject] private IScoreManager _scoreManager;
+        [Inject] private ITurnsManager _turnsManager;
 
         public Action<BoardChangeData> OnBoardChanged { get; set; }
 
@@ -54,6 +58,11 @@ namespace PlanATest.Game.Board.Manager
 
         public void ClickedElement(Vector2Int position)
         {
+            if (_turnsManager.CurrentTurn <= 0)
+            {
+                return;
+            }
+
             var elementsToDestroy = GetElementsToDestroy(position);
             if (elementsToDestroy.Count == 0)
             {
@@ -68,6 +77,9 @@ namespace PlanATest.Game.Board.Manager
 
             var boardChangeData = new BoardChangeData(elementsToDestroy, elementToMove, elementsToSpawn);
             OnBoardChanged?.Invoke(boardChangeData);
+
+            _scoreManager.AddScore(elementsToDestroy.Count);
+            _turnsManager.RemoveTurn();
         }
 
         private List<ElementToDestroy> GetElementsToDestroy(Vector2Int position, List<ElementToDestroy> elements = null, BoardElementData elementType = null)
