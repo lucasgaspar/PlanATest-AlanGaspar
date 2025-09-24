@@ -65,10 +65,7 @@ namespace PlanATest.Game.Board.View
                 _elements[elementToMove.To] = gridElementView;
             }
 
-            if (boardChangeData.ElementsToMove.Count > 0)
-            {
-                await UniTask.WaitForSeconds(0.5f);
-            }
+            await UniTask.WaitForSeconds(0.5f);
 
             foreach (var elementToSpawn in boardChangeData.ElementsToSpawn)
             {

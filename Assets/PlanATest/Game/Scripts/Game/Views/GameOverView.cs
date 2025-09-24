@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using PlanATest.Game.Turns.Interfaces;
 using UnityEngine;
 using Zenject;
@@ -21,8 +22,9 @@ namespace PlanATest.Game.Game.Manager
             _turnsManager.OnNoTurnsLeft -= ShowGameOver;
         }
 
-        private void ShowGameOver()
+        private async void ShowGameOver()
         {
+            await UniTask.WaitForSeconds(1.25f);
             _gameOverPanel.SetActive(true);
         }
     }
