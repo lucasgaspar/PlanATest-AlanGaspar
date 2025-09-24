@@ -13,4 +13,12 @@ MonoBehaviour:
   m_Name: LevelData
   m_EditorClassIdentifier: Assembly-CSharp::PlanATest.Game.Game.ScriptableObjects.LevelDataSO
   <Data>k__BackingField:
+    <Height>k__BackingField: 6
+    <Width>k__BackingField: 5
+    <Elements>k__BackingField:
+    - {fileID: 11400000, guid: bce1f33858df84ddcbcd6efb03261266, type: 2}
+    - {fileID: 11400000, guid: 28dd7e6f24ebf498f87b37e5aedbace7, type: 2}
+    - {fileID: 11400000, guid: 09734c994eac34485bc790db8b06963a, type: 2}
+    - {fileID: 11400000, guid: 98f4605011aba45278f02da4584e0bb1, type: 2}
+    - {fileID: 11400000, guid: 88a0c5331f911449bb89fbda42e21a7b, type: 2}
     <Turns>k__BackingField: 5
