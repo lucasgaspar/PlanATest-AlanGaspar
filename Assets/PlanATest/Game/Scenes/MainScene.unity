@@ -980,6 +980,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 694141910}
   m_CullTransparentMesh: 1
+--- !u!1 &790773530
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 790773531}
+  m_Layer: 0
+  m_Name: BoardElementsPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &790773531
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790773530}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1194902415
 GameObject:
   m_ObjectHideFlags: 0
@@ -1251,7 +1282,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1227403389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1766,6 +1797,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1669463352}
   - component: {fileID: 1669463351}
+  - component: {fileID: 1669463353}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -1819,7 +1851,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -6185343655787597505, guid: e6d8645f36ae642bfb4ae4d264a8c958, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1846,6 +1878,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 524352813}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1669463353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669463350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9561945fbf986457283e960c9c048e23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlanATest.Game.Board.View.BoardView
 --- !u!1 &1770684153
 GameObject:
   m_ObjectHideFlags: 0
@@ -1876,6 +1920,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82b8c99e873b04fa3a6176cc44340267, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlanATest.Game.Game.Manager.GameContext
+  _boardElementPrefab: {fileID: 7963665264393422542, guid: ee2b3198f23a943ec861ac18a9e7b00b, type: 3}
+  _boardElementsPool: {fileID: 790773531}
   _levelDataSO: {fileID: 11400000, guid: 5d7db4aa237314e70968ba6498b7d92a, type: 2}
 --- !u!114 &1770684155
 MonoBehaviour:
@@ -2167,3 +2213,4 @@ SceneRoots:
   - {fileID: 181110434}
   - {fileID: 504321859}
   - {fileID: 85968282}
+  - {fileID: 790773531}
