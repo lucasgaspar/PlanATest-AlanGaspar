@@ -14,6 +14,8 @@ namespace PlanATest.Game.Board.View
         [Inject] private IBoardManager _grid;
         [Inject] private BoardElementView.Pool _boardElementViewPool;
 
+        public bool IsMovingPieces { get; private set; }
+
         private void Start()
         {
             SetupBoard();
@@ -39,18 +41,21 @@ namespace PlanATest.Game.Board.View
                     var gridElementView = _boardElementViewPool.Spawn(elementData, position);
                     gridElementView.transform.SetParent(transform);
                     _elements[position] = gridElementView;
+                    gridElementView.SetBoardView(this);
                 }
             }
         }
 
         private async void OnBoardChanged(BoardChangeData boardChangeData)
         {
+            IsMovingPieces = true;
+
             foreach (var elementToDestroy in boardChangeData.ElementsToDestroy)
             {
                 _elements[elementToDestroy.Position].Destroy();
             }
 
-            await UniTask.WaitForSeconds(1f);
+            await UniTask.WaitForSeconds(0.5f);
 
             foreach (var elementToMove in boardChangeData.ElementsToMove)
             {
@@ -62,7 +67,7 @@ namespace PlanATest.Game.Board.View
 
             if (boardChangeData.ElementsToMove.Count > 0)
             {
-                await UniTask.WaitForSeconds(1f);
+                await UniTask.WaitForSeconds(0.5f);
             }
 
             foreach (var elementToSpawn in boardChangeData.ElementsToSpawn)
@@ -70,7 +75,10 @@ namespace PlanATest.Game.Board.View
                 var gridElementView = _boardElementViewPool.Spawn(elementToSpawn.ElementData, elementToSpawn.Position);
                 gridElementView.transform.SetParent(transform);
                 _elements[elementToSpawn.Position] = gridElementView;
+                gridElementView.SetBoardView(this);
             }
+
+            IsMovingPieces = false;
         }
     }
 }

@@ -19,6 +19,7 @@ namespace PlanATest.Game.Board.View
 
         private BoardElementData _elementData;
         private Vector2Int _position;
+        private BoardView _boardView;
 
         public void OnSpawned(BoardElementData elementData, Vector2Int position)
         {
@@ -28,6 +29,11 @@ namespace PlanATest.Game.Board.View
             _spriteRenderer.sprite = _elementData.Sprite;
             _spriteRenderer.sortingOrder = _position.y;
             transform.position = GetTransformedPosition(_position);
+        }
+
+        public void SetBoardView(BoardView boardView)
+        {
+            _boardView = boardView;
         }
 
         public void OnDespawned()
@@ -59,6 +65,11 @@ namespace PlanATest.Game.Board.View
 
         private void OnMouseUpAsButton()
         {
+            if (_boardView != null && _boardView.IsMovingPieces)
+            {
+                return;
+            }
+
             _onClicked?.Invoke();
         }
 
